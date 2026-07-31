@@ -1,0 +1,8 @@
+# generated types
+.vscode
+
+# dependencies
+node_modules/
+
+# macOS-specific files
+.DS_Store
