@@ -31,9 +31,15 @@ jobs:
 
       - name: Check files
         run: ls -R .
+      - name: JWT Debug
+        run: |
+          # OIDCトークンを取得してデコードし、実際の sub と aud をログに出す
+          JWT=$(curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" | jq -r '.value')
+          echo "--- AWSに送信される実際の sub の値 ---"
+          echo "$JWT" | cut -d'.' -f2 | base64 --decode 2>/dev/null | jq -r '.sub'
         # 認証情報を取得しAWSにアクセス可能にする
       - name: Configure AWS credentials from IAM Role
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
