@@ -35,7 +35,7 @@ jobs:
       - name: Configure AWS credentials from IAM Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::752559933061:role/pocket-insight-github-actions-rule
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
         # sync: ディレクトリ内のファイルをS3のディレクトリに同期させる
