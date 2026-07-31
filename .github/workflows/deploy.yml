@@ -21,16 +21,16 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-          path: /
+          path: .
 
       - name: Check files
-        run: ls -R /
+        run: ls -R .
         # 認証情報を取得しAWSにアクセス可能にする
       - name: Configure AWS credentials from IAM Role
         uses: aws-actions/configure-aws-credentials@v1
@@ -42,7 +42,7 @@ jobs:
         # cp: ファイルをS3のバケットにコピーする
       - name: Upload files to S3
         run: |
-          aws s3 sync --delete dist s3://${{ secrets.AWS_S3_BUCKET }}/
+          aws s3 sync --delete . s3://${{ secrets.AWS_S3_BUCKET }}/
       - name: Invalidate CloudFront Cache
         run: |
           aws cloudfront create-invalidation \
