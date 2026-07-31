@@ -33,7 +33,7 @@ jobs:
         run: ls -R .
         # 認証情報を取得しAWSにアクセス可能にする
       - name: Configure AWS credentials from IAM Role
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
