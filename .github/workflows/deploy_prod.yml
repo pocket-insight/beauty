@@ -18,11 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22' # プロジェクトに合わせて変更してください
-          cache: 'npm'
+    #   - name: Setup Node.js   #npm installやnpm run buildが必要な場合はコメントアウトを外す
+    #     uses: actions/setup-node@v4
+    #     with:
+    #       node-version: '22' # プロジェクトに合わせて変更してください
+    #       cache: 'npm'
     #   - name: Install dependencies
     #     run: npm ci
     #   - name: Build.       # Buildが必要になったら追加
